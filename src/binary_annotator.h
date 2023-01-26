@@ -47,13 +47,14 @@ enum class BinaryRegionType {
   Float = 15,
   Double = 16,
   UType = 17,
+  UOffset64 = 18,
 };
 
 template<typename T>
 static inline std::string ToHex(T i, size_t width = sizeof(T)) {
   std::stringstream stream;
-  stream << std::hex << std::uppercase << std::setfill('0') << std::setw(static_cast<int>(width))
-         << i;
+  stream << std::hex << std::uppercase << std::setfill('0')
+         << std::setw(static_cast<int>(width)) << i;
   return stream.str();
 }
 
@@ -215,6 +216,7 @@ inline static BinaryRegionType GetRegionType(reflection::BaseType base_type) {
 inline static std::string ToString(const BinaryRegionType type) {
   switch (type) {
     case BinaryRegionType::UOffset: return "UOffset32";
+    case BinaryRegionType::UOffset64: return "UOffset64";
     case BinaryRegionType::SOffset: return "SOffset32";
     case BinaryRegionType::VOffset: return "VOffset16";
     case BinaryRegionType::Bool: return "bool";
